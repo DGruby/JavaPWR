@@ -1,19 +1,21 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        ex2();
-    }
-
-    public static void ex2 (){
         //ex2a();
         //ex2b();
         //ex2c();
+        //ex2d();
+        //ex2e();
+        //ex2f();
+        System.out.println(countVowels("aoe035eeecdg"));
     }
 
-    public static void ex2a () {
+
+    public static void ex2a() {
         //2a
         ArrayList<String> names = new ArrayList<>(
                 Arrays.asList("George", "John", "Ferdynand", "Marek", "Ola"));
@@ -21,19 +23,19 @@ public class Main {
         for (int i = 0; i < length; i++) {
             for (String name : names) {
                 System.out.println(name);
-        }
+            }
             System.out.println();
-            names.remove(0);
+            names.removeFirst();
         }
     }
 
-    public static void ex2b () {
+    public static void ex2b() {
         int n = InputHelper.readInt("Length of an array: ");
         ArrayList<Integer> names = new ArrayList<>();
         Random rn = new Random();
         //populate array
         for (int i = 0; i < n; i++) {
-            names.add(rn.nextInt(10)+1);
+            names.add(rn.nextInt(10) + 1);
         }
         for (int i = 0; i < n; i++) {
             System.out.println(names.get(i));
@@ -41,7 +43,7 @@ public class Main {
 
         System.out.println("Reverse order:");
         ArrayList<Integer> reversed = ex2bReverse(names);
-        for (int num: reversed) {
+        for (int num : reversed) {
             System.out.println(num);
         }
     }
@@ -71,5 +73,145 @@ public class Main {
         return sentence.toString();
     }
 
-    public static void ex2d() {}
+    public static void ex2d() {
+        var linkedList = createLinkedList(1000000);
+        var arrayList = createArrayList(1000000);
+        System.out.println("Linked list time: " + timeLinkedListAccess(linkedList, 10000) + "ms");
+        System.out.println("Array list time: " + timeArrayListAccess(arrayList, 10000) + "ms");
+
+    }
+
+    //create an array list of specified length populated with random integers from 1-100
+    public static ArrayList<Integer> createArrayList(int size) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            list.add(random.nextInt(100) + 1);
+        }
+        return list;
+    }
+
+    //create a linked list of specified length populated with random integers 1-100
+    public static LinkedList<Integer> createLinkedList(int size) {
+        LinkedList<Integer> list = new LinkedList<>();
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            list.add(random.nextInt(100) + 1);
+        }
+        return list;
+    }
+
+    //two methods for timing linked lists and array lists (returns time in ms)
+    public static int timeArrayListAccess(ArrayList<Integer> list, int numQueries) {
+        Random random = new Random();
+        int listSize = list.size();
+        int tempVariable = 0;
+        long initialTime = System.currentTimeMillis();
+
+        for (int i = 0; i < numQueries; i++) {
+            tempVariable = list.get(random.nextInt(0, listSize));
+        }
+        long endTime = System.currentTimeMillis();
+        return (int) (endTime - initialTime);
+    }
+
+    public static int timeLinkedListAccess(LinkedList<Integer> list, int numQueries) {
+        Random random = new Random();
+        int listSize = list.size();
+        int tempVariable = 0;
+        long initialTime = System.currentTimeMillis();
+
+        for (int i = 0; i < numQueries; i++) {
+            tempVariable = list.get(random.nextInt(0, listSize));
+        }
+        long endTime = System.currentTimeMillis();
+        return (int) (endTime - initialTime);
+    }
+
+    public static void ex2e() {
+        var linkedList = createLinkedList(1000000);
+        var arrayList = createArrayList(1000000);
+
+        //timing a linked list:
+        long startTimeLinked = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            linkedList.addFirst(i);
+        }
+        long endTimeLinked = System.currentTimeMillis();
+        System.out.println("Time linkedList: " + (endTimeLinked - startTimeLinked) + "ms");
+
+        long startTimeArray = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            arrayList.add(0, i);
+        }
+        long endTimeArray = System.currentTimeMillis();
+        System.out.println("Time array: " + (endTimeArray - startTimeArray) + "ms");
+    }
+
+    //not finished
+    public static void ex2f() {
+        var linkedList = createLinkedList(1000000);
+        var arrayList = createArrayList(1000000);
+        Random random = new Random();
+
+        long startTimeLinked = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            linkedList.add(random.nextInt(linkedList.size() + 1), i);
+        }
+        long endTimeLinked = System.currentTimeMillis();
+        System.out.println("Time linkedList: " + (endTimeLinked - startTimeLinked) + "ms");
+
+        long startTimeArray = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            arrayList.add(random.nextInt(arrayList.size() + 1), i);
+        }
+        long endTimeArray = System.currentTimeMillis();
+        System.out.println("Time array: " + (endTimeArray - startTimeArray) + "ms");
+    }
+
+    //removing from the beginning:
+    public static void ex2g() {
+        var linkedList = createLinkedList(1000000);
+        var arrayList = createArrayList(1000000);
+        Random random = new Random();
+
+        long startTimeLinked = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            linkedList.removeFirst();
+        }
+        long endTimeLinked = System.currentTimeMillis();
+        System.out.println("Time linkedList: " + (endTimeLinked - startTimeLinked) + "ms");
+
+        long startTimeArray = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            arrayList.removeFirst();
+        }
+        long endTimeArray = System.currentTimeMillis();
+        System.out.println("Time array: " + (endTimeArray - startTimeArray) + "ms");
+    }
+
+    /*
+    ex2h - The differences in time have to do with different implementations of both LinkedList and ArrayList
+    data structures. Linked list is made up of containers, that each stores one value and a link to the next
+    item. This means, that in order do access any element, we cannot access it directly by its index,
+    but iterate over the whole structure until we find the right container. On the other hand, adding items
+    at the beginning is faster, because you only have to adjust a few references.
+    An array list consists of a few sequentially placed memory adresses, so accessing and removing/adding
+    items with a given index is much faster, but placing an item in the beginnning or the middle, requires
+    shifting all of the items, which takes more time than a linked list.
+   */
+
+    //ex2i
+    public static int countVowels(String word) {
+        int count = 0;
+        for (char c : word.toLowerCase().toCharArray()) {
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+
 }

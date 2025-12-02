@@ -5,14 +5,17 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        //ex2a();
-        //ex2b();
-        //ex2c();
-        //ex2d();
-        //ex2e();
-        //ex2f();
-        //System.out.println(countVowels("aoe035eeecdg"));
-        //System.out.println(isPrime(4));
+        ex2a();
+        ex2b();
+        ex2c();
+        ex2d();
+        ex2e();
+        ex2f();
+        System.out.println(countVowels("aoe035eeecdg"));
+        System.out.println(isPrime(4));
+        //exk
+        int[] nums = {5, 9, 2, 9, 1};
+        System.out.println(findSecondLargest(nums));
     }
 
 
@@ -149,7 +152,6 @@ public class Main {
         System.out.println("Time array: " + (endTimeArray - startTimeArray) + "ms");
     }
 
-    //not finished
     public static void ex2f() {
         var linkedList = createLinkedList(1000000);
         var arrayList = createArrayList(1000000);
@@ -224,8 +226,23 @@ public class Main {
         return true;
     }
 
-    public static int findSecondLargest(int[] array) {
+    public static int findSecondLargest(int[] arr) {
+        if (arr.length < 2) {
+            throw new IllegalArgumentException("Array must have at least 2 elements.");
+        }
 
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+
+        for (int num : arr) {
+            if (num > largest) {
+                secondLargest = largest;
+                largest = num;
+            } else if (num > secondLargest && num != largest) {
+                secondLargest = num;
+            }
+        }
+        return secondLargest;
     }
 
 }

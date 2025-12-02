@@ -11,6 +11,7 @@ public class Main {
         ex2d();
         ex2e();
         ex2f();
+        ex2g();
         System.out.println(countVowels("aoe035eeecdg"));
         System.out.println(isPrime(4));
         //exk
@@ -146,7 +147,7 @@ public class Main {
 
         long startTimeArray = System.currentTimeMillis();
         for (int i = 0; i < 10000; i++) {
-            arrayList.add(0, i);
+            arrayList.addFirst(i);
         }
         long endTimeArray = System.currentTimeMillis();
         System.out.println("Time array: " + (endTimeArray - startTimeArray) + "ms");

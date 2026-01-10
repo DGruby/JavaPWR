@@ -5,7 +5,8 @@ public class Receptionist extends Staff {
     }
 
     public Receptionist(String name, int age) {
-        this.name = name;
-        this.age = age;
+        setName(name);
+        setAge(age);
+        setRole("Receptionist");
     }
 }

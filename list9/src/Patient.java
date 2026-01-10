@@ -5,7 +5,7 @@ public class Patient extends Person implements Treatable {
     }
 
     public Patient(String name, int age) {
-        this.name = name;
-        this.age = age;
+        setName(name);
+        setAge(age);
     }
 }

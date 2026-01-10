@@ -9,7 +9,8 @@ public class Doctor extends Staff {
     }
 
     public Doctor(String name, int age) {
-        this.name = name;
-        this.age = age;
+        setName(name);
+        setAge(age);
+        setRole("Doctor");
     }
 }

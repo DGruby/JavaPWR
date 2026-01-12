@@ -7,9 +7,7 @@ public class Nurse extends Staff {
     }
 
     public Nurse(String name, int age) {
-        setName(name);
-        setAge(age);
-        setRole("Nurse");
+        super(name, age, "Nurse");
     }
 
 

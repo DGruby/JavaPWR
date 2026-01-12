@@ -1,6 +1,11 @@
 public abstract class Person {
-    private int age;
-    private String name;
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
     public void introduce() {
         System.out.println(name + ", " + age + " years old.");
